@@ -6,13 +6,14 @@
 ?>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-12 col-xl-8">
                 <div class="card">
                     <div class="card-header">
                         <h3>Service List</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped" >
+                        <div class="table-responsive">
+                        <table class="table table-striped admin-table">
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
@@ -24,7 +25,7 @@
                                     <td><?=$sl+1?></td>
                                     <td><?= e($service['name']) ?></td>
                                     <td class="text-wrap"><?= e($service['desp']) ?></td>
-                                    <td class="text-center">
+                                    <td class="text-center admin-actions">
                                         <a href="edit.php?id=<?=$service['id']?>" title="edit"><i class="fas fa-edit text-primary fa-xl"></i></i></a>
                                         <form method="POST" action="delete.php" class="d-inline">
                                             <input type="hidden" name="id" value="<?=$service['id']?>">
@@ -35,10 +36,11 @@
                                 </tr>
                             <?php } ?>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-12 col-xl-4">
                 <div class="card">
                     <div class="card-header">
                         <h3>Add New Service</h3>

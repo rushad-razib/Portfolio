@@ -19,27 +19,29 @@
                     <h3>Form Submissions</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <div class="table-responsive">
+                    <table class="table table-bordered admin-table">
                         <tr>
-                            <th>SL</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Message</th>
-                            <th>Time</th>
+                            <th class="admin-fit">SL</th>
+                            <th class="admin-fit">Name</th>
+                            <th class="admin-fit">Email</th>
+                            <th class="admin-wrap">Message</th>
+                            <th class="admin-fit">Time</th>
                         </tr>
                         <?php foreach($submission_exec as $sl=>$submissions){ ?>
                         <tr>
-                            <td><?=$sl+1?></td>
-                            <td><?= e($submissions['name']) ?></td>
-                            <td><?= e($submissions['email']) ?></td>
-                            <td><?= e($submissions['message']) ?></td>
+                            <td class="admin-fit"><?=$sl+1?></td>
+                            <td class="admin-fit"><?= e($submissions['name']) ?></td>
+                            <td class="admin-fit"><?= e($submissions['email']) ?></td>
+                            <td class="admin-wrap"><?= e($submissions['message']) ?></td>
                             <?php
                                 $submission_date = Carbon::parse($submissions['submission_date'])->diffForHumans();
                             ?>
-                            <td><?= e($submission_date) ?></td>
+                            <td class="admin-fit"><?= e($submission_date) ?></td>
                         </tr>
                         <?php } ?>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

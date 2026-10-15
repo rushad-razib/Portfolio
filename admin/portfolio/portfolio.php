@@ -8,13 +8,14 @@ $select_exec = mysqli_query($db_connect, $select);
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-12 col-xl-8">
                 <div class="card">
                     <div class="card-header">
                         <h3>Portfolio List</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <div class="table-responsive">
+                        <table class="table table-striped admin-table">
                             <tr>
                                 <th>SL</th>
                                 <th>Image</th>
@@ -26,11 +27,11 @@ $select_exec = mysqli_query($db_connect, $select);
                             <?php foreach($select_exec as $key=>$portfolio){ ?>
                                 <tr>
                                     <td><?=$key+1?></td>
-                                    <td><img width="500px" src="../uploads/portfolio/<?= e($portfolio['photo']) ?>" alt=""></td>
+                                    <td><img class="admin-thumb" src="../uploads/portfolio/<?= e($portfolio['photo']) ?>" alt=""></td>
                                     <td><?= e($portfolio['name']) ?></td>
                                     <td><?= e($portfolio['sub']) ?></td>
                                     <td><?= e($portfolio['link']) ?></td>
-                                    <td class="text-center">
+                                    <td class="text-center admin-actions">
                                         <form method="POST" action="delete.php" class="d-inline">
                                             <input type="hidden" name="id" value="<?=$portfolio['id']?>">
                                             <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
@@ -40,10 +41,11 @@ $select_exec = mysqli_query($db_connect, $select);
                                 </tr>
                             <?php } ?>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-12 col-xl-4">
                 <div class="card">
                     <div class="card-header">
                         <h3>Add Portfolio</h3>

@@ -77,7 +77,11 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#portfolio">Portfolio</a></li>
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#contact">Contact</a></li>
 			</ul>
-			<a class="btn btn-warning px-4 py-2 rounded" href="admin/login.php">Login</a>
+			<?php if (isset($_SESSION['access'])) { ?>
+			<a class="btn btn-warning px-4 py-2 rounded" href="/admin/dashboard/admin_dashboard.php">Dashboard</a>
+			<?php } else { ?>
+			<a class="btn btn-warning px-4 py-2 rounded" href="/admin/login.php">Login</a>
+			<?php } ?>
 	  </div>
 	</div>
 </nav>

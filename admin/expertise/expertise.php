@@ -10,13 +10,14 @@ $expert_exec = mysqli_query($db_connect, $select_expertise);
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-12 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     <h4>Expertise List</h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <div class="table-responsive">
+                    <table class="table table-bordered admin-table">
                         <tr>
                             <th>SL</th>
                             <th>Name</th>
@@ -36,7 +37,7 @@ $expert_exec = mysqli_query($db_connect, $select_expertise);
                                         <button type="submit" class="btn btn-<?=($expertise['status']==0?'danger':'primary')?>"><?=($expertise['status']==0?'Inactive':'Active')?></button>
                                     </form>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center admin-actions">
                                     <a href="edit.php?id=<?=$expertise['id']?>" title="edit"><i class="fas fa-edit text-primary fa-xl"></i></i></a>
                                     <form method="POST" action="delete.php" class="d-inline">
                                         <input type="hidden" name="id" value="<?=$expertise['id']?>">
@@ -47,10 +48,11 @@ $expert_exec = mysqli_query($db_connect, $select_expertise);
                             </tr>
                         <?php } ?>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-12 col-xl-4">
             <div class="card">
                 <div class="card-header">
                     <h4>Add Expertise</h4>

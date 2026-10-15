@@ -23,10 +23,11 @@ require 'includes/escape.php';
 	<!-- endinject -->
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="assets/css/demo_1/style.css">
+	<link rel="stylesheet" href="assets/css/admin.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="assets/images/favicon.png" />
 </head>
-<body>
+<body class="sidebar-dark">
 	<div class="main-wrapper">
 		<div class="page-wrapper full-page">
 			<div class="page-content d-flex align-items-center justify-content-center">

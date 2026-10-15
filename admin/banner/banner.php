@@ -42,11 +42,11 @@ if (!$banner_fetch) {
                         </div>
                         <div class="mb-3">
                             <div class="row">
-                                <div class="form-group ml-3">
+                                <div class="col-12 col-md-6 form-group">
                                     <label for="butn_text" class="form-label">Button Text</label>
                                     <input type="text" name="butn_text" class="form-control" value="<?= e($banner_fetch['butn_text']) ?>">
                                 </div>
-                                <div class="form-group ml-4">
+                                <div class="col-12 col-md-6 form-group">
                                     <label for="butn_link" class="form-label">Button Link</label>
                                     <input type="text" name="butn_link" class="form-control" value="<?= e($banner_fetch['butn_link']) ?>">
                                 </div>

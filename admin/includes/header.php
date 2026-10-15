@@ -36,10 +36,11 @@ if (!$select_fetch) {
 	<!-- endinject -->
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="/admin/assets/css/demo_1/style.css">
+	<link rel="stylesheet" href="/admin/assets/css/admin.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="/admin/assets/images/favicon.png" />
 </head>
-<body>
+<body class="sidebar-dark">
 	<div class="main-wrapper">
 
 		<!-- partial:partials/_sidebar.html -->
@@ -59,39 +60,39 @@ if (!$select_fetch) {
           <li class="nav-item nav-category">Main</li>
           <li class="nav-item">
             <a href="/admin/dashboard/admin_dashboard.php" class="nav-link">
-              <i class="link-icon" data-feather="box"></i>
+              <i class="link-icon" data-feather="layout"></i>
               <span class="link-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item nav-category">User Panel</li>
           <li class="nav-item">
             <a href="/admin/user/profile.php" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
+              <i class="link-icon" data-feather="user"></i>
               <span class="link-title">Profile</span>
             </a>
           </li>
           <li class="nav-item nav-category">Sections</li>
           <li class="nav-item">
             <a href="/admin/banner/banner.php" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
+              <i class="link-icon" data-feather="image"></i>
               <span class="link-title">Banner</span>
             </a>
           </li>
           <li class="nav-item">
             <a href="/admin/expertise/expertise.php" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
+              <i class="link-icon" data-feather="award"></i>
               <span class="link-title">Expertise</span>
             </a>
           </li>
           <li class="nav-item">
             <a href="/admin/service/service.php" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
+              <i class="link-icon" data-feather="briefcase"></i>
               <span class="link-title">Service</span>
             </a>
           </li>
           <li class="nav-item">
             <a href="/admin/portfolio/portfolio.php" class="nav-link">
-              <i class="link-icon" data-feather="message-square"></i>
+              <i class="link-icon" data-feather="folder"></i>
               <span class="link-title">Portfolio</span>
             </a>
           </li>
