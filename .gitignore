@@ -1,0 +1,8 @@
+admin/auth/db.local.php
+error_log
+/docs/
+/*.md
+/vendor/
+/uploads/banner/
+/admin/uploads/portfolio/
+/admin/uploads/user/

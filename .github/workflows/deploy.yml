@@ -1,0 +1,134 @@
+# Deploy to cPanel (rushadrazib.com) on push to main.
+#
+# Required GitHub repo secrets:
+#   DEPLOY_HOST     - SSH host (e.g. rushadrazib.com)
+#   DEPLOY_USER     - SSH user
+#   DEPLOY_SSH_KEY  - private key whose public half is in ~/.ssh/authorized_keys
+#   DEPLOY_PATH     - /home/<user>/public_html
+#   DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
+#
+# Optional:
+#   DEPLOY_PORT     - SSH port (default 22)
+#
+# The workflow writes admin/auth/db.local.php on the server. It is never committed.
+# The extract overlays files and does not delete uploads or other existing paths.
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check secrets
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+        run: |
+          set -euo pipefail
+          test -n "${DEPLOY_HOST}"
+          test -n "${DEPLOY_USER}"
+          test -n "${DEPLOY_SSH_KEY}"
+          test -n "${DEPLOY_PATH}"
+          test -n "${DB_HOST}"
+          test -n "${DB_USER}"
+          test -n "${DB_PASSWORD}"
+          test -n "${DB_NAME}"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, fileinfo
+          coverage: none
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: Write database config
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+        run: |
+          set -euo pipefail
+          php <<'PHP'
+          <?php
+          $contents = "<?php\n\n"
+              . '$hostname = ' . var_export(getenv('DB_HOST'), true) . ";\n"
+              . '$username = ' . var_export(getenv('DB_USER'), true) . ";\n"
+              . '$password = ' . var_export(getenv('DB_PASSWORD'), true) . ";\n"
+              . '$db_name = ' . var_export(getenv('DB_NAME'), true) . ";\n";
+          if (file_put_contents('admin/auth/db.local.php', $contents) === false) {
+              fwrite(STDERR, "Could not write database config.\n");
+              exit(1);
+          }
+          PHP
+
+      - name: Setup SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "${DEPLOY_SSH_KEY}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          PORT="${DEPLOY_PORT:-22}"
+          ssh-keyscan -p "${PORT}" -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload application
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          PORT="${DEPLOY_PORT:-22}"
+          SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o RequestTTY=no)
+          tar \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=docs \
+            --exclude='*.md' \
+            --exclude=error_log \
+            --exclude=admin/auth/db.local.php \
+            --exclude=uploads/banner \
+            --exclude=admin/uploads/portfolio \
+            --exclude=admin/uploads/user \
+            -czf - . | ssh "${SSH_OPTS[@]}" "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "bash --noprofile --norc -c 'mkdir -p \"${DEPLOY_PATH}\" && tar -xzf - -C \"${DEPLOY_PATH}\"'"
+
+      - name: Upload database config
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          PORT="${DEPLOY_PORT:-22}"
+          scp -i ~/.ssh/deploy_key -P "${PORT}" -o IdentitiesOnly=yes \
+            admin/auth/db.local.php \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/admin/auth/db.local.php"
