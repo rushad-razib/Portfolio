@@ -214,11 +214,11 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   background: #bc2a8d;
 }
 
-.overly, .bg-3 {
+.overly {
   position: relative;
 }
 
-.overly:before, .bg-3:before {
+.overly:before {
   content: "";
   position: absolute;
   left: 0;
@@ -343,18 +343,6 @@ a:hover, a:focus {
 
 .lh-35 {
   line-height: 35px;
-}
-
-.bg-1 {
-  background-image: url("../images/call-to-action-bg.html");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-.bg-3 {
-  background: url("../images/bg/b-3.html");
-  background-size: cover;
 }
 
 .lh-45 {

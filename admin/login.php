@@ -12,7 +12,7 @@ require 'includes/escape.php';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Admin Portal</title>
+	<title>Rushad Razib Panel</title>
 	<!-- core:css -->
 	<link rel="stylesheet" href="assets/vendors/core/core.css">
 	<!-- endinject -->
@@ -20,7 +20,6 @@ require 'includes/escape.php';
 	<!-- end plugin css for this page -->
 	<!-- inject:css -->
 	<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
-	<link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
 	<!-- endinject -->
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="assets/css/demo_1/style.css">
@@ -43,7 +42,7 @@ require 'includes/escape.php';
                 </div>
                 <div class="col-md-8 pl-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
-                    <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+                    <a href="#" class="noble-ui-logo d-block mb-2">Rushad<span>Razib</span></a>
                     <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
                     <form action="auth/login_post.php" method="POST" class="forms-sample">
                       <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">

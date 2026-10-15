@@ -37,6 +37,7 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
   <meta name="author" content="rushadrazib.com">
 
   <title>Rushad Razib | Web Dev</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
 
   <!-- Mobile Specific Meta-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,12 +48,6 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
   <!-- animate.css -->
   <link rel="stylesheet" href="plugins/animate-css/animate.css">
   <link rel="stylesheet" href="plugins/aos/aos.css">
-  <!-- owl carousel -->
-  <link rel="stylesheet" href="plugins/owl/assets/owl.carousel.min.css">
-  <link rel="stylesheet" href="plugins/owl/assets/owl.theme.default.min.css" >
-  <!-- Slick slider CSS -->
-  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
-  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -80,7 +75,6 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#skillbar">Expertise</a></li>
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#service">Services</a></li>
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#portfolio">Portfolio</a></li>
-			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#testimonial">Testimonial</a></li>
 			   <li class="nav-item"><a class="nav-link smoth-scroll" href="#contact">Contact</a></li>
 			</ul>
 			<a class="btn btn-warning px-4 py-2 rounded" href="admin/login.php">Login</a>
@@ -321,12 +315,7 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
     <!-- Bootstrap 4.3.1 -->
     <script src="plugins/bootstrap/js/popper.js"></script>
     <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="plugins/nav/jquery.easing.1.3.html"></script>
-    
-    <!-- Slick Slider -->
-    <script src="plugins/slick-carousel/slick/slick.min.js"></script>
-    <script src="plugins/owl/owl.carousel.min.js"></script>
-  
+
     <!-- Skill COunt -->
     <script src="plugins/counto/apear.js"></script>
     <script src="plugins/counto/counTo.js"></script>
@@ -334,7 +323,6 @@ $select_port_exec = mysqli_query($db_connect, $select_port);
     <script src="plugins/aos/aos.js"></script>
     
     <script src="js/script.js"></script>
-    <script src="js/ajax-contact.html"></script>
 	
   </body>
 </html>

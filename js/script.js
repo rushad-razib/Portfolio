@@ -6,28 +6,6 @@ AOS.init({
 (function($) {
     'use strict';
 
- 
-// post gallery
-
-        $('.post_gallery').owlCarousel({
-            loop:true,
-            margin:1,
-            nav:true,
-            dots: false,
-            navText : ["<i class='ti-angle-left'></i>","<i class='ti-angle-right'></i>"],
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },
-                1000:{
-                    items:4
-                }
-            }
-        });
-
          // SCROLL TO TOP
   
   $(window).on('scroll', function () {
@@ -64,18 +42,6 @@ AOS.init({
         e.preventDefault();
     });
 
- 
- $('.testimonial-slider').slick({
-		slidesToShow: 1,
-		infinite: true,
-		dots: true,
-		arrows: false,
-		autoplay: true,
-		autoplaySpeed: 5000
-	});
-
-
-  
     $(window).on ('load', function (){ // makes sure the whole site is loaded
 
           // ----------------------- 
